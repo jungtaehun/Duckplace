@@ -2,9 +2,10 @@ class CreateDucks < ActiveRecord::Migration
   def change
     create_table :ducks do |t|
       t.integer :region
-      t.string :mtitle
+      t.text :address
+      t.text :daddress
+      t.string :name
       t.integer :mtype
-      t.text :maddress
       t.float :mlong
       t.float :mlat
       t.string :imglnk

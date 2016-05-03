@@ -7,16 +7,18 @@
       <div class="mdl-layout-spacer"></div>
       <!-- Navigation. We hide it in small screens. -->
       <nav class="mdl-navigation mdl-layout--large-screen-only">
-        <a class="mdl-navigation__link" href="https://enigmatic-fjord-54990.herokuapp.com/">새로운 데이터 추가</a>
+        <a class="mdl-navigation__link" href="/home/new">새로운 데이터 추가</a>
       </nav>
     </div>
   </header>
   <div class="mdl-layout__drawer">
     <span class="mdl-layout-title">우리들의 성지</span>
     <nav class="mdl-navigation">
-      <a class="mdl-navigation__link" href="https://enigmatic-fjord-54990.herokuapp.com/">새로운 데이터 추가</a>
+      <a class="mdl-navigation__link" href="/home/new">새로운 데이터 추가</a>
     </nav>
   </div>
+  
+  
   
   <main class="mdl-layout__content">
     <div class="page-content" background="#E3F2FD">
@@ -34,7 +36,7 @@
 }
 .demo-card-wide > .mdl-card__title {
   color: #fff;
-  height: 124px;
+  height: 150px;
   background: #2196F3;
   
 }
@@ -45,7 +47,7 @@
 
 <div class="demo-card-wide mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col">
   <div class="mdl-card__title">
-    <img src=<%= p.imglnk %> alt="이미지" height="80" width="80"><h2 class="mdl-card__title-text" style="margin-left: 5px; position: absolute;"><%= p.mtitle %><br><br>주소 : <%= p.maddress %></h2>
+    <img src=<%= p.imglnk %> alt="이미지" height="80" width="80"><h2 class="mdl-card__title-text" style="margin-left: 5px; position: absolute;"><%= p.name %><br><br>주소 : <%= p.address+' '+p.daddress %></h2>
   </div>
   <div class="mdl-card__supporting-text">
   	
@@ -76,7 +78,7 @@ marker.setMap(map);
 map.setDraggable(false);
 map.setZoomable(false);
 
-var iwContent = '<div style="padding:5px;"><%= p.mtitle %> <br><a href="http://map.daum.net/link/map/<%= p.mtitle %>,<%= p.mlat %>,<%= p.mlong %>" style="color:blue" target="_blank">큰지도보기</a> <a href="http://map.daum.net/link/to/<%= p.mtitle %>,<%= p.mlat %>,<%= p.mlong %>" style="color:blue" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+var iwContent = '<div style="padding:5px;"><%= p.name %> <br><a href="http://map.daum.net/link/map/<%= p.name %>,<%= p.mlat %>,<%= p.mlong %>" style="color:blue" target="_blank">큰지도보기</a> <a href="http://map.daum.net/link/to/<%= p.name %>,<%= p.mlat %>,<%= p.mlong %>" style="color:blue" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
     iwPosition = new daum.maps.LatLng(<%= p.mlat%>, <%= p.mlong %>); //인포윈도우 표시 위치입니다
 
 // 인포윈도우를 생성합니다
@@ -115,4 +117,14 @@ infowindow.open(map, marker);
     
     </div>
   </main>
+  <footer class="mdl-mini-footer">
+  <div class="mdl-mini-footer__left-section">
+    <div class="mdl-logo">우리들의 성지</div>
+    <ul class="mdl-mini-footer__link-list">
+      <li><a href="#">멋쟁이 사자처럼</a></li>
+      <li><a href="#"><img src='http://localhost:3000/assets/logo_orenge.png') alt="이미지"></a></li>
+    </ul>
+  </div>
+</footer>
 </div>
+

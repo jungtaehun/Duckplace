@@ -15,9 +15,10 @@ ActiveRecord::Schema.define(version: 20160502133942) do
 
   create_table "ducks", force: :cascade do |t|
     t.integer  "region"
-    t.string   "mtitle"
+    t.text     "address"
+    t.text     "daddress"
+    t.string   "name"
     t.integer  "mtype"
-    t.text     "maddress"
     t.float    "mlong"
     t.float    "mlat"
     t.string   "imglnk"
