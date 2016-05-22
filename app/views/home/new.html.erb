@@ -1,2 +1,56 @@
-<h1>Home#new</h1>
-<p>Find me in app/views/home/new.html.erb</p>
+<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header ">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title">새로운 데이터 작성</span>
+      <!-- Add spacer, to align navigation to the right -->
+      <div class="mdl-layout-spacer"></div>
+      <!-- Navigation. We hide it in small screens. -->
+
+    </div>
+  </header>
+
+  
+  <main class="mdl-layout__content">
+    <div class="page-content">
+      
+      
+      
+  
+  <form  action="/home/write" method="POST">
+    
+
+  
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell mdl-cell--12-col">
+    <input name="title" class="mdl-textfield__input" type="text" id="sample3">
+    <label class="mdl-textfield__label" for="sample3">가게 이름</label>
+  </div>
+  <!--
+  <div class="mdl-textfield mdl-js-textfield mdl-cell mdl-cell--12-col">
+    
+    <textarea name="content" class="mdl-textfield__input " rows="5" id="sample5"></textarea>
+    <label class="mdl-textfield__label" for="sample5">게시판 내용</label>
+  </div>-->
+    <button type="submit"  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-cell mdl-cell--12-col reply_submit">전송</button>
+  
+  
+
+  
+  
+
+
+</form>
+
+
+  
+  
+  
+  </div>
+
+
+
+
+
+
+  </main>
+</div>

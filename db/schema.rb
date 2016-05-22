@@ -21,9 +21,9 @@ ActiveRecord::Schema.define(version: 20160502133942) do
     t.integer  "mtype"
     t.float    "mlong"
     t.float    "mlat"
-    t.string   "imglnk"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "image_url",  default: ""
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
 end

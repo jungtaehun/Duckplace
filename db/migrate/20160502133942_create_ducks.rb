@@ -8,7 +8,7 @@ class CreateDucks < ActiveRecord::Migration
       t.integer :mtype
       t.float :mlong
       t.float :mlat
-      t.string :imglnk
+      t.string :image_url,   :default => ""
 
       t.timestamps null: false
     end
