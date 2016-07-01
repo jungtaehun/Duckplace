@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160502133942) do
+ActiveRecord::Schema.define(version: 20160701094120) do
 
   create_table "ducks", force: :cascade do |t|
     t.integer  "region"
@@ -24,6 +24,11 @@ ActiveRecord::Schema.define(version: 20160502133942) do
     t.string   "image_url",  default: ""
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+  end
+
+  create_table "replies", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
