@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'home/detail'
+
   get 'home/index'
 
   get 'home/new'
@@ -7,6 +9,8 @@ Rails.application.routes.draw do
   post 'home/write'
 
   get 'home/edit'
+
+  get "home/detail/:id" => 'home#detail'
 
   get 'home/test'
 

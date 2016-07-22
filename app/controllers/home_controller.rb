@@ -12,6 +12,13 @@ class HomeController < ApplicationController
 
 
   end
+
+  def detail
+
+    @detail = Duck.find(params[:id])
+
+
+  end
   
   def write
     duck = Duck.new

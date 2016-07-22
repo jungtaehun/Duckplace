@@ -30,13 +30,6 @@
   height: 100%;
   width: 100%;
 }
-.test{
-	
-	box-sizing: border-box;
-	padding: 20;
-	height: cover;
-  	width: 100%;
-}
 .mdl-demo .mdl-layout__tab-bar .mdl-layout__tab {
   height: 64px;
   line-height: 64px;
@@ -235,12 +228,12 @@
   	
     <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
       <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary">
-        <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+        <div class="mdl-layout mdl-layout__header-row">
         </div>
         <div class="mdl-layout--large-screen-only mdl-layout__header-row">
           <h3>우리들의 성지</h3>
         </div>
-        <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+        <div class="mdl-layout mdl-layout__header-row">
         </div>
         <div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
           <a href="#overview" class="mdl-layout__tab is-active">서울</a>
@@ -248,11 +241,14 @@
           <a href="#features" class="mdl-layout__tab">경기</a>
           <a href="#features" class="mdl-layout__tab">...</a>
           <a href="#features" class="mdl-layout__tab">...</a>
-          <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-shadow--4dp mdl-color--accent show-modal" id="add">
-            <i class="material-icons" role="presentation">add</i>
-            <span class="visuallyhidden">Add</span>
-          </button>
         </div>
+
+        <button class="mdl-button mdl-layout--large-screen mdl-layout--small-screen mdl-js-button mdl-button--fab mdl-button--raised mdl-js-ripple-effect mdl-button--colored mdl-shadow--4dp mdl-color--accent show-modal" id="add">
+          <i class="material-icons" role="presentation">add</i>
+          <span class="visuallyhidden">Add</span>
+        </button>
+
+
       </header>
       <main class="mdl-layout__content">
       	
@@ -298,6 +294,8 @@
             </div>
           </dialog>
 
+
+
           <script>
             var dialog = document.querySelector('dialog');
             var showModalButton = document.querySelector('.show-modal');
@@ -311,6 +309,9 @@
               dialog.close();
             });
           </script>
+
+
+
         	<% @place1.each do |p|%>
           <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
             <header class="section__play-btn mdl-cell mdl-cell--3-col-desktop mdl-cell--2-col-tablet mdl-cell--4-col-phone mdl-color--teal-100 mdl-color-text--white" style="background-image: url(<% unless p.image_url.nil? %>
@@ -329,7 +330,7 @@
                		 주소 : <%= p.address+' '+p.daddress %>
               </div>
               <div class="mdl-card__actions">
-                <a href="#" class="mdl-button">가게 상세 위치</a>
+                <a href="/home/detail/<%= p.id %>" class="mdl-button" data-rel="dialog" data-transition="pop">Read our features</a>
               </div>
             </div>
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="btn<%= p.id %>">
@@ -338,8 +339,92 @@
             <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="btn<%= p.id %>">
               <li class="mdl-menu__item">수정</li>
             </ul>
+
+            <dialog class="maptest" style="border: none;
+                box-shadow: 0 9px 46px 8px rgba(0,0,0,.14),0 11px 15px -7px rgba(0,0,0,.12),0 24px 38px 3px rgba(0,0,0,.2);
+                width: 500px;">
+              <div id="map" style="width:400px; height:500px;"></div>
+
+              <script>
+
+                var cityhall = new naver.maps.LatLng(<%= p.mlat %>, <%= p.mlong %>);
+
+                var map = new naver.maps.Map('map', {
+                  center: new naver.maps.LatLng(<%= p.mlat %>, <%= p.mlong %>),
+                  zoom: 10
+                });
+
+                var contentString = [
+                  '<div class="iw_inner">',
+                  '   <h3>서울특별시청</h3>',
+                  '   <p>서울특별시 중구 태평로1가 31 | 서울특별시 중구 세종대로 110 서울특별시청<br>',
+                  '       <img src="./img/hi-seoul.jpg" width="55" height="55" alt="서울시청" class="thumb" /><br>',
+                  '       02-120 | 공공,사회기관 > 특별,광역시청<br>',
+                  '       <a href="http://www.seoul.go.kr" target="_blank">www.seoul.go.kr/</a>',
+                  '   </p>',
+                  '</div>'
+                ].join('');
+
+                var marker = new naver.maps.Marker({
+                  map: map,
+                  position: cityhall
+                });
+
+                var infowindow = new naver.maps.InfoWindow({
+
+                  content: contentString,
+
+                  backgroundColor: "#eee",
+                  borderColor: "#2db400",
+                  borderWidth: 0,
+                  anchorSize: new naver.maps.Size(30, 30),
+                  anchorSkew: true,
+                  anchorColor: "#eee",
+
+                  pixelOffset: new naver.maps.Point(20, -20)
+                });
+
+                naver.maps.Event.addListener(marker, "click", function(e) {
+                  if (infowindow.getMap()) {
+                    infowindow.close();
+                  } else {
+                    infowindow.open(map, marker);
+                  }
+                });
+
+              </script>
+
+              <div class="mdl-dialog__actions">
+                <button type="button" class="mdl-button">Agree</button>
+                <button type="button" class="mdl-button close">Disagree</button>
+              </div>
+
+              <div class="mdl-dialog__actions mdl-dialog__actions--full-width">
+
+              </div>
+            </dialog>
+
+            <script>
+              var dialog1 = document.querySelector('.maptest');
+              var showModalButton = document.querySelector('.show-map');
+              if (! dialog1.showModal) {
+                dialogPolyfill.registerDialog(dialog1);
+              }
+              showModalButton.addEventListener('click', function() {
+                dialog1.showModal();
+              });
+              dialog1.querySelector('.close').addEventListener('click', function() {
+                dialog1.close();
+              });
+
+            </script>
+
+
+
           </section>
           <% end %>
+
+
           
           
           
@@ -386,6 +471,8 @@
           <% end %>
         </div>
 
+
+
         <footer class="mdl-mega-footer">
           <div align="center">
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -416,5 +503,7 @@
         </footer>
       </main>
     </div>
+
+
     
     <script src="https://code.getmdl.io/1.1.3/material.min.js"></script>
