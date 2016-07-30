@@ -260,7 +260,7 @@
             </div>
             <div class="mdl-dialog__content">
 
-              <form  action="/home/write" method="POST" enctype="multipart/form-data">
+              <form  action="/home/second" method="POST" enctype="multipart/form-data">
                 <h5>지역</h5>
                 <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="region-1">
                   <input type="radio" id="region-1" class="mdl-radio__button" name="region" value="1" checked>
@@ -286,6 +286,7 @@
                 <button type="submit"  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-cell mdl-cell--12-col reply_submit">전송</button>
 
               </form>
+              <button  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent mdl-cell mdl-cell--12-col close">취소</button>
 
             </div>
 
@@ -327,7 +328,7 @@
             <div class="mdl-card mdl-cell mdl-cell--9-col-desktop mdl-cell--6-col-tablet mdl-cell--4-col-phone">
               <div class="mdl-card__supporting-text">
                 <h4><%= p.name %></h4>
-               		 주소 : <%= p.address+' '+p.daddress %>
+               		 주소 : <%= p.address %> <%=p.daddress %>
               </div>
               <div class="mdl-card__actions">
                 <a href="/home/detail/<%= p.id %>" class="mdl-button" data-rel="dialog" data-transition="pop">Read our features</a>
