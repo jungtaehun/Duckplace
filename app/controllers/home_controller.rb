@@ -22,14 +22,17 @@ class HomeController < ApplicationController
 
   def second
     sec_name = params[:name]
-    sec_address = params[:address]
 
+
+=begin
     if sec_name == "" and sec_address == ""
       #다시 시도하세요.
     elsif sec_name == ""
       #주소로 검색
 
-      uri = URI(URI.encode("https://openapi.naver.com/v1/map/geocode?query=#{params[:address]}"))
+      duck.name = sec
+
+      uri = URI(URI.encode("https://openapi.naver.com/v1/map/geocode?query=#{params[:address]}&coord=tm128"))
 
       req = Net::HTTP::Get.new(uri)
       req['X-Naver-Client-Id'] = "DZaaw4YVOevidOL4rL06"
@@ -39,11 +42,14 @@ class HomeController < ApplicationController
         http.request(req)}
 
       parsed = JSON.parse(res.body)["result"]["items"][0]
+      duck.name = parsed["title"]
       duck.address = parsed["address"]
       duck.mlong = parsed["point"]["x"]
       duck.mlat = parsed["point"]["y"]
 
+
     else
+=end
       #가게 이름으로 검색(수정해야함)
 
       uri = URI(URI.encode("https://openapi.naver.com/v1/search/local.xml?query=#{params[:name]}"))
@@ -55,12 +61,21 @@ class HomeController < ApplicationController
       res = Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == 'https') {|http|
         http.request(req)}
 
-      parsed = JSON.parse(res.body)["result"]["items"][0]
-      duck.address = parsed["address"]
-      duck.mlong = parsed["point"]["x"]
-      duck.mlat = parsed["point"]["y"]
+      xml_doc = Nokogiri::XML(res.body)
+      @dtest = xml_doc.xpath("//item")
+      #@dname =  xml_doc.xpath("//item //title")
+      #@dx =  xml_doc.xpath("//item //mapx").inner_text
+      #@dy =  xml_doc.xpath("//item //mapy").inner_text
+      #@daddress =  xml_doc.xpath("//item //roadAddress").inner_text
 
-    end
+
+
+
+    #end
+
+
+
+
 
     #그다음 결과값을 나열해서 선택하게 한다.
     #결과값이 정해지면 그 값을 데이터에 저장한다.

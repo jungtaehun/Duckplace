@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   get 'home/edit'
 
-  get 'home/second' => 'home#second'
+  post 'home/second' => 'home#second'
 
   get "home/detail/:id" => 'home#detail'
 
